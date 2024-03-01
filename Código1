@@ -1,0 +1,72 @@
+#include<stdio.h>
+#define N 500
+
+struct Livro {
+    char nome[100];
+    char autor[100];
+    int paginas;
+
+
+    void ler() {
+        printf("Digite o nome do livro: ");
+        scanf("%[^\n]%*c", nome);
+        printf("Digite o nome do autor: ");
+        scanf("%[^\n]%*c", autor);
+        printf("Digite a quantidade de paginas: ");
+        scanf("%d%*c", &paginas);
+    }
+
+    void imprimir(){
+        printf("\n");
+        printf("Nome do livro: %s\n", nome);
+        printf("Nome do autor: %s\n", autor);
+        printf("Quantidade de paginas: %d\n", paginas);
+    }
+};
+
+struct biblioteca{
+    int qtdlivros;
+    Livro livros[20];
+
+    void ler(){
+        printf("Digite a quantidade de livros: ");
+        scanf("%d%*c", &qtdlivros);
+        if(qtdlivros > 10){
+            printf("Quantidade de livros deve ser no maximo 10\n");
+            qtdlivros = 10;
+        }
+        for(int i = 0; i < qtdlivros; i++){
+            livros[i].ler();
+        }
+    }
+
+    void imprimir(){
+        for (int i = 0; i < qtdlivros; i++) {
+        livros[i].imprimir();
+        }
+    }
+
+    void livromaior(){
+        int maiorlivro = 0;
+        int qtdmaiorpag = 0;
+        for(int i = 0; i < qtdlivros; i++){
+            if(livros[i].paginas > qtdmaiorpag){
+                qtdmaiorpag = livros[i].paginas;
+                maiorlivro = i;
+            }
+        }
+        printf("\n");
+        printf("Livro com maior quantidade de paginas:\n");
+        livros[maiorlivro].imprimir();
+    }
+
+};
+
+int main() {
+
+    biblioteca l;
+    l.ler();
+    l.imprimir();
+    l.livromaior();
+    return 0;
+}
